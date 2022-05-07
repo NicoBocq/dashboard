@@ -1,22 +1,22 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { useDashboard } from './store'
+import DHeader from './components/layout/DHeader.vue'
+import DSection from './components/layout/DSection.vue'
+import DGrid from './components/layout/DGrid.vue'
+import DHeaderSection from "./components/layout/DHeaderSection.vue";
+
+const dashboard = useDashboard()
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <h1 class="text-3xl font-bold">zob</h1>
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <DHeader />
+  <DHeaderSection />
+  <DSection title="kooking">
+    <DGrid>
+      fff
+    </DGrid>
+  </DSection>
+  {{ dashboard.movieList }}
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
