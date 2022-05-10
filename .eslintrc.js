@@ -4,7 +4,6 @@ module.exports = {
     es2021: true,
     node: true,
     'vue/setup-compiler-macros': true
-
   },
   extends: [
     'plugin:vue/essential',
@@ -21,5 +20,6 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    'vue/no-multiple-template-root': 'off'
   }
 }
