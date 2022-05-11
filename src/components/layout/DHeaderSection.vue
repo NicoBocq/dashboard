@@ -2,6 +2,7 @@
   <div class="relative bg-indigo-800">
     <div class="absolute inset-0">
       <img
+        v-if="!isLoading || !backgroundImage"
         class="w-full h-full object-cover"
         :src="backgroundImage"
         alt=""
@@ -23,6 +24,8 @@
 type SectionHeaderProps = {
   title: string
   backgroundImage: string | undefined
+  isLoading: boolean
 }
+
 const props = defineProps<SectionHeaderProps>()
 </script>

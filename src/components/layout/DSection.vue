@@ -1,6 +1,12 @@
 <template>
-  <section aria-labelledby="products-heading" class="mt-8">
-    <h2 id="products-heading" class="sr-only">
+  <section
+    aria-labelledby="movies-heading"
+    class="container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8"
+  >
+    <h2
+      id="movies-heading"
+      class="sr-only"
+    >
       {{ title }}
     </h2>
     <slot />
@@ -8,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-interface DSectionProps {
+export type DSectionProps = {
   title: string
 }
 

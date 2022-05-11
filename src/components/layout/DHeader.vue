@@ -6,7 +6,7 @@
     >
       <div class="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
         <div class="flex items-center">
-          <router-link to="/">
+          <router-link :to="{ name: 'Home', params: { id: 0 } }">
             <img
               class="h-10 w-auto"
               src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDashboard } from '../../store'
+import { useDashboard } from '../../store/dashboard'
 
 const { nav } = useDashboard()
 

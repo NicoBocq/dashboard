@@ -18,34 +18,40 @@ export const useDashboard = defineStore('dashboard', {
       movieList: [],
       nav: [
         {
-          id: 1,
+          id: 28,
           label: 'Action'
         },
         {
-          id: 2,
+          id: 12,
           label: 'Aventure'
         },
         {
-          id: 3,
+          id: 35,
           label: 'Comédie'
         },
         {
-          id: 4,
+          id: 99,
           label: 'Documentaire'
         }
       ],
-      isLoading: false
+      isLoading: true
     } as RootState
   },
   actions: {
     setLoading (payload: boolean) {
       this.isLoading = payload
     },
-    async fetchMovies () {
+    async fetchMovies (id = 0) {
       this.setLoading(true)
-      await axios.get('https://api.themoviedb.org/3/trending/movie/week?api_key=09711e051464919907eba6253d0cd44f')
+      let url
+      if (!id) {
+        url = 'https://api.themoviedb.org/3/trending/movie/week?api_key=09711e051464919907eba6253d0cd44f'
+      } else {
+        url = `https://api.themoviedb.org/3/discover/movie?api_key=09711e051464919907eba6253d0cd44f&with_genres=${id}`
+      }
+      await axios.get(url)
         .then((response) => {
-          this.movieList.push(...response.data.results)
+          this.movieList = response.data.results
         })
         .catch(error => {
           console.log(error)
