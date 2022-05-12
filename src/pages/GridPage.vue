@@ -1,6 +1,5 @@
 <template>
   <DHeaderSection
-    title="zob"
     :background-image="getRandomImage"
     :is-loading="isLoading"
   />
@@ -33,12 +32,21 @@ import DGrid from '../components/layout/DGrid.vue'
 import DHeaderSection from '../components/layout/DHeaderSection.vue'
 import DCard from '../components/ui/DCard.vue'
 
-import { onBeforeRouteUpdate } from 'vue-router'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import SkeletonCard from '../components/ui/SkeletonCard.vue'
+import { watchEffect } from 'vue'
+const router = useRoute()
 const { fetchMovies } = useDashboard()
-const store = useDashboard()
-const { getRandomImage, movieList, isLoading } = storeToRefs(store)
+const dashboarStore = useDashboard()
+const { getRandomImage, movieList, isLoading } = storeToRefs(dashboarStore)
+const { id } = router.params
+
+watchEffect(() => {
+  if (!movieList.value.length) {
+    fetchMovies(+id)
+  }
+})
 
 onBeforeRouteUpdate(async (to, from) => {
   if (to.params.id !== from.params.id) {

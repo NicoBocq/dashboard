@@ -17,6 +17,7 @@ export const useDashboard = defineStore('dashboard', {
     return {
       movieList: [],
       nav: [
+        { id: 1, label: 'Trending' },
         {
           id: 28,
           label: 'Action'
@@ -41,13 +42,13 @@ export const useDashboard = defineStore('dashboard', {
     setLoading (payload: boolean) {
       this.isLoading = payload
     },
-    async fetchMovies (id = 0) {
+    async fetchMovies (id: number) {
       this.setLoading(true)
       let url
-      if (!id) {
-        url = 'https://api.themoviedb.org/3/trending/movie/week?api_key=09711e051464919907eba6253d0cd44f'
+      if (!id || id === 1) {
+        url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${import.meta.env.VITE_PWD}`
       } else {
-        url = `https://api.themoviedb.org/3/discover/movie?api_key=09711e051464919907eba6253d0cd44f&with_genres=${id}`
+        url = `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_PWD}&with_genres=${id}`
       }
       await axios.get(url)
         .then((response) => {
@@ -64,7 +65,14 @@ export const useDashboard = defineStore('dashboard', {
       if (state.movieList.length > 0) {
         const image = state.movieList[Math.floor(Math.random() * state.movieList.length)].backdrop_path
         return `https://image.tmdb.org/t/p/w500${image}`
+      } else {
+        return ''
       }
+    },
+    getSectionTitle: (state: RootState) => (id: number) => {
+      const category = state.nav.find(cat => cat.id === id)
+      return category ? category.label : state.nav[0].label
     }
+
   }
 })

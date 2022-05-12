@@ -1,17 +1,13 @@
 <template>
-  <header class="bg-indigo-600">
+  <header class="bg-stone-600">
     <nav
       class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       aria-label="Top"
     >
-      <div class="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
+      <div class="w-full py-6 flex items-center justify-between border-b border-stone-500 lg:border-none">
         <div class="flex items-center">
-          <router-link :to="{ name: 'Home', params: { id: 0 } }">
-            <img
-              class="h-10 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
-              alt=""
-            >
+          <router-link :to="{ name: 'Home', params: { id: 1 } }">
+            <LightningBoltIcon class="h-8 w-8 text-white hover:text-neutral-200" />
           </router-link>
           <div class="hidden ml-10 space-x-8 lg:block">
             <router-link
@@ -56,6 +52,7 @@
 </template>
 
 <script setup lang="ts">
+import { LightningBoltIcon } from '@heroicons/vue/solid'
 import { useDashboard } from '../../store/dashboard'
 
 const { nav } = useDashboard()
