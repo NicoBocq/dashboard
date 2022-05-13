@@ -2,8 +2,9 @@
   <DHeaderSection
     :background-image="getRandomImage"
     :is-loading="isLoading"
+    :title="sectionTitle"
   />
-  <DSection title="fdsf">
+  <DSection :title="sectionTitle">
     <DGrid>
       <transition-group
         v-if="!isLoading"
@@ -35,16 +36,17 @@ import DCard from '../components/ui/DCard.vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import SkeletonCard from '../components/ui/SkeletonCard.vue'
-import { watchEffect } from 'vue'
+import { watchEffect, computed } from 'vue'
 const router = useRoute()
 const { fetchMovies } = useDashboard()
 const dashboarStore = useDashboard()
 const { getRandomImage, movieList, isLoading } = storeToRefs(dashboarStore)
-const { id } = router.params
+const id = computed(() => +router.params.id)
+const sectionTitle = computed(() => dashboarStore.getSectionTitle(id.value))
 
 watchEffect(() => {
   if (!movieList.value.length) {
-    fetchMovies(+id)
+    fetchMovies(id.value)
   }
 })
 

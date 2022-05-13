@@ -1,10 +1,10 @@
 <template>
   <section
-    aria-labelledby="movies-heading"
+    :aria-labelledby="`${title}-heading`"
     class="container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8"
   >
     <h2
-      id="movies-heading"
+      :id="`${title}-heading`"
       class="sr-only"
     >
       {{ title }}
@@ -17,6 +17,5 @@
 export type DSectionProps = {
   title: string
 }
-
 const props = defineProps<DSectionProps>()
 </script>

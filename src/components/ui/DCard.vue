@@ -14,7 +14,7 @@
         </a>
       </h3>
       <HeartIcon
-        class="w-8 h-8 cursor-pointer flex-shrink-0"
+        class="w-8 h-8 cursor-pointer flex-shrink-0 hover:opacity-75"
         :class="isSelected ? 'text-red-500' : 'text-stone-800'"
         @click="userStore.addToFavorite(movie.id)"
       />
